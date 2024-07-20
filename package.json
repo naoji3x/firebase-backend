@@ -1,0 +1,32 @@
+{
+  "name": "firebase-backend",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "list": "firebase projects:list",
+    "emulator": "cd functions && npm run build && cd .. && firebase emulators:start --import=emulator-data --export-on-exit=emulator-data",
+    "deploy:rules": "firebase deploy --only firestore:rules && firebase deploy --only storage",
+    "gc:init": "(cd scripts/terraform && gcloud init)",
+    "gc:login": "(cd scripts/terraform && gcloud auth application-default login)",
+    "gc:logout": "(cd scripts/terraform && gcloud auth application-default revoke && gcloud auth revoke)",
+    "tf:init": "(cd scripts/terraform && terraform init)",
+    "tf:plan:dev": "npm run tf:init && (cd scripts/terraform && terraform plan -var-file=development.tfvars)",
+    "tf:apply:dev": "npm run tf:init && (cd scripts/terraform && terraform apply -var-file=development.tfvars)",
+    "functions:watch": "(cd functions && npm run build:watch)",
+    "functions:deploy": "(cd functions && npm run deploy)",
+    "clean:modules": "rm -rf node_modules functions/node_modules",
+    "clean": "npm run clean:modules && rm package-lock.json functions/package-lock.json",
+    "install:all": "(cd functions && npm i && cd .. && npm i)"
+  },
+  "engines": {
+    "node": "18"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "19.3.0",
+    "@commitlint/config-conventional": "19.2.2",
+    "eslint": "8.57.0",
+    "eslint-config-prettier": "9.1.0",
+    "prettier": "3.2.5",
+    "typescript": "5.5.2"
+  }
+}
