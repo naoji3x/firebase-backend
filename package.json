@@ -16,7 +16,8 @@
     "functions:deploy": "(cd functions && npm run deploy)",
     "clean:modules": "rm -rf node_modules functions/node_modules",
     "clean": "npm run clean:modules && rm package-lock.json functions/package-lock.json",
-    "install:all": "(cd functions && npm i && cd .. && npm i)"
+    "install:all": "(cd functions && npm i && cd .. && npm i)",
+    "lefthook:refresh": "lefthook uninstall && lefthook install"
   },
   "engines": {
     "node": "18"
